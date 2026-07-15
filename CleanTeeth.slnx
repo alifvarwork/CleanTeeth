@@ -4,5 +4,7 @@
     <Project Path="CleanTeeth.Domain/CleanTeeth.Domain.csproj" Id="4c87906b-6a7f-47f3-a9f9-fb6a61d8a571" />
   </Folder>
   <Folder Name="/Infrustructure/" />
-  <Folder Name="/Tests/" />
+  <Folder Name="/Tests/">
+    <Project Path="CleanTeeth.Test/CleanTeeth.Test.csproj" Id="1c1aeebc-5f85-47ad-ba6c-942d34abe83b" />
+  </Folder>
 </Solution>
