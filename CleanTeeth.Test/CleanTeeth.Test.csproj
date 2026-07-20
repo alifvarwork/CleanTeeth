@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CleanTeeth.Domain\CleanTeeth.Domain.csproj" />
+    <ProjectReference Include="..\Core\CleanTeeth.Domain\CleanTeeth.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
