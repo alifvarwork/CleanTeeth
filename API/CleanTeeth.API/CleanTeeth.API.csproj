@@ -14,9 +14,5 @@
     <ProjectReference Include="..\..\Core\CleenTeeth.Application\CleenTeeth.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CleanTeeth.Persistence\CleanTeeth.Persistence.csproj" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
 
 </Project>

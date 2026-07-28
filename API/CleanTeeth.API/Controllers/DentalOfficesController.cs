@@ -1,0 +1,31 @@
+﻿using CleanTeeth.API.DTOs.DentalOffices;
+using CleenTeeth.Application.Features.DentalOffices.Commands.CreateDentalOffice;
+using CleenTeeth.Application.Features.DentalOffices.Queries.GetDentalOfficeDetail;
+using CleenTeeth.Application.Utilities;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CleanTeeth.API.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class DentalOfficesController(IMediator mediator) : ControllerBase
+    {
+        [HttpGet("{id}")]
+        public async Task<ActionResult<DentalOfficeDetailDTO>> Get(Guid id)
+        {
+            var query = new GetDentalOfficeDetailQuery{ Id = id };
+            var result = await mediator.Send(query);
+
+            return result;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(CreateDentalOfficeDTO createDentalOfficeDTO)
+        {
+            var command = new CreateDentalOfficeCommand { Name = createDentalOfficeDTO.Name };
+            await mediator.Send(command);
+            
+            return Ok();
+        }
+    }
+}
