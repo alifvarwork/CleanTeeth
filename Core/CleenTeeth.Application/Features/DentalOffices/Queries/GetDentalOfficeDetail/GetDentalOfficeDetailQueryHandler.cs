@@ -10,10 +10,6 @@ public class GetDentalOfficeDetailQueryHandler(IDentalOfficeRepository repositor
     public async Task<DentalOfficeDetailDTO> Handle(GetDentalOfficeDetailQuery request)
     {
         var dentalOffice = await repository.GetById(request.Id) ?? throw new NotFoundException("Dental office not found");
-        return new DentalOfficeDetailDTO
-        {
-            Id = dentalOffice.Id,
-            Name = dentalOffice.Name
-        };
+        return dentalOffice.ToDTO();
     }
 }
