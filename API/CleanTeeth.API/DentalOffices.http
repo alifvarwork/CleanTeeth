@@ -5,7 +5,7 @@ ACCEPT: application/json
 
 ###
 
-POST {{CleanTeeth.API_HostAddress}}
+POST {{CleanTeeth.API_HostAddress}} 
 Content-Type: application/json
 
 {
