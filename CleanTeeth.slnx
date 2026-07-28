@@ -4,7 +4,9 @@
     <Project Path="Core/CleanTeeth.Domain/CleanTeeth.Domain.csproj" Id="4c87906b-6a7f-47f3-a9f9-fb6a61d8a571" />
     <Project Path="Core/CleenTeeth.Application/CleenTeeth.Application.csproj" Id="af916a3e-d48f-404e-9026-296c8270c3a3" />
   </Folder>
-  <Folder Name="/Infrustructure/" />
+  <Folder Name="/Infrustructure/">
+    <Project Path="Infrastructure/CleanTeeth.Persistence/CleanTeeth.Persistence.csproj" Id="e6e063ea-51b5-42a6-b165-3814ead90d66" />
+  </Folder>
   <Folder Name="/Tests/">
     <Project Path="CleanTeeth.Test/CleanTeeth.Test.csproj" Id="1c1aeebc-5f85-47ad-ba6c-942d34abe83b" />
   </Folder>

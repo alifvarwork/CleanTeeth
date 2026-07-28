@@ -2,6 +2,6 @@
 
 namespace CleenTeeth.Application.Contracts.Repositories;
 
-public interface IDentalOfficeRepository:IRepository<DentalOffice>
+public interface IDentalOfficeRepository : IRepository<DentalOffice>
 {
 }
