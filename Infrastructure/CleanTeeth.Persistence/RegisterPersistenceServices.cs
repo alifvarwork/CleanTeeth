@@ -13,12 +13,13 @@ public static class RegisterPersistenceServices
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
+        var connectionString = configuration.GetConnectionString("CleanTeethDbConnection");
         services.AddDbContext<CleanTeethDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(connectionString));
 
         services.AddScoped<IUnitOfWork, UnitOfWorkEFCore>();
 
-        services.AddScoped<IRepository<DentalOffice>, DentalOfficeRepository>();
+        services.AddScoped<IDentalOfficeRepository, DentalOfficeRepository>();
         return services;
     }
 }

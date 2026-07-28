@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\Core\CleenTeeth.Application\CleenTeeth.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
