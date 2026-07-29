@@ -1,12 +1,8 @@
 ﻿
 using CleanTeeth.Domain.Entities;
-using CleenTeeth.Application.Contracts.Persistence;
 using CleenTeeth.Application.Contracts.Repositories;
-using CleenTeeth.Application.Exceptions;
-using CleenTeeth.Application.Features.DentalOffices.Commands.CreateDentalOffice;
-using CleenTeeth.Application.Features.DentalOffices.Queries.GetDentalOfficeDetail;
+using CleenTeeth.Application.Features.DentalOffices.Queries.GetDentalOfficesList;
 using NSubstitute;
-using NSubstitute.ReturnsExtensions;
 
 namespace CleanTeeth.Test.Application.Features.DentalOffices;
 
@@ -30,27 +26,33 @@ public class GetDentalOfficesListQueryHandlerTests
     public async Task Handle_DentalOfficeNotFound_ThrowsNotFoundException()
     {
         var dentalOfficeId = Guid.NewGuid();
-        repository.GetById(dentalOfficeId).ReturnsNull<DentalOffice>();
+        repository.GetAll().Returns([]);
 
-        var query = new GetDentalOfficeDetailQuery { Id = dentalOfficeId };
+        var result = await handler.Handle(new GetDentalOfficesListQuery());
 
-        await Assert.ThrowsAsync<NotFoundException>(() => handler.Handle(query));
+        Assert.IsNotNull(result);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
-    public async Task Handle_ValidQuery_ReturnsDentalOfficeDetailDTO()
+    public async Task Handle_ValidQuery_ReturnsDentalOfficesListDTO()
     {
-        var dentalOffice = new DentalOffice("Dental Office A");
-        var dentalOfficeId = dentalOffice.Id;
+        var dentalOffices = new List<DentalOffice>
+        {
+            new("Dental Office A"),
+            new("Dental Office B")
+        };
 
-        var query = new GetDentalOfficeDetailQuery { Id = dentalOfficeId };
+        var query = new GetDentalOfficesListQuery();
 
-        repository.GetById(dentalOfficeId).Returns(dentalOffice);
+        repository.GetAll().Returns(dentalOffices);
 
         var result = await handler.Handle(query);
 
         Assert.IsNotNull(result);
-        Assert.AreEqual(dentalOffice.Id, result.Id);
-        Assert.AreEqual(dentalOffice.Name, result.Name);
+        Assert.AreEqual(dentalOffices[0].Id, result[0].Id);
+        Assert.AreEqual(dentalOffices[0].Name, result[0].Name);
+        Assert.AreEqual(dentalOffices[1].Id, result[1].Id);
+        Assert.AreEqual(dentalOffices[1].Name, result[1].Name);
     }
 }

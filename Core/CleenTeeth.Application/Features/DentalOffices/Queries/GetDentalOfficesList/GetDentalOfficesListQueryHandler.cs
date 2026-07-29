@@ -4,7 +4,7 @@ using CleenTeeth.Application.Utilities;
 
 namespace CleenTeeth.Application.Features.DentalOffices.Queries.GetDentalOfficesList;
 
-internal class GetDentalOfficesListQueryHandler(IDentalOfficeRepository repository) :
+public class GetDentalOfficesListQueryHandler(IDentalOfficeRepository repository) :
     IRequestHandler<GetDentalOfficesListQuery, List<DentalOfficesListDTO>>
 {
     public async Task<List<DentalOfficesListDTO>> Handle(GetDentalOfficesListQuery request)
