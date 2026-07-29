@@ -1,6 +1,7 @@
 ﻿using CleanTeeth.Domain.Entities;
 using CleenTeeth.Application.Contracts.Persistence;
 using CleenTeeth.Application.Contracts.Repositories;
+using CleenTeeth.Application.Exceptions;
 using CleenTeeth.Application.Utilities;
 
 namespace CleenTeeth.Application.Features.DentalOffices.Commands.UpdateDentalOffice;
@@ -12,7 +13,7 @@ public class UpdateDentalOfficeCommandHandler(IDentalOfficeRepository repository
     {
 
         var dentalOffice = await repository.GetById(command.Id) 
-                            ?? throw new InvalidOperationException("Dental office not found.");
+                            ?? throw new NotFoundException("Dental office not found.");
         dentalOffice.UpdateName(command.Name);
 
         try
