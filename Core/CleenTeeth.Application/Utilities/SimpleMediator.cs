@@ -12,6 +12,21 @@ public class SimpleMediator(IServiceProvider serviceProvider) : IMediator
         return await HandleRequest(request);
     }
 
+    public async Task Send(IRequest request)
+    {
+        await ValidateRequest(request);
+        await HandleRequest(request);
+    }
+
+    private async Task HandleRequest(IRequest request)
+    {
+        var handlerType = typeof(IRequestHandler<>).MakeGenericType(request.GetType());
+        var handler = serviceProvider.GetService(handlerType)
+                        ?? throw new MediatorException($"Handler was not found for {request.GetType().Name}");
+        var method = handlerType.GetMethod("Handle")!;
+        await (Task)method.Invoke(handler, [request])!;
+    }
+
     private async Task<TResponse> HandleRequest<TResponse>(IRequest<TResponse> request)
     {
         var handlerType = typeof(IRequestHandler<,>).MakeGenericType(request.GetType(), typeof(TResponse));
@@ -22,7 +37,7 @@ public class SimpleMediator(IServiceProvider serviceProvider) : IMediator
         return await (Task<TResponse>)method.Invoke(handler, [request])!;
     }
 
-    private async Task ValidateRequest<TResponse>(IRequest<TResponse> request)
+    private async Task ValidateRequest(object request)
     {
         var validatorType = typeof(IValidator<>).MakeGenericType(request.GetType());
         var validator = serviceProvider.GetService(validatorType);
