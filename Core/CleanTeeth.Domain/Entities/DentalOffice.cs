@@ -9,12 +9,22 @@ public class DentalOffice
 
     public DentalOffice(string name)
     {
-        if(string.IsNullOrWhiteSpace(name))
-        {
-            throw new BussinessRuleException("Dental office name cannot be empty.");
-        }
+        EnforeceNameBusinessRules(name);
 
         Name = name;
         Id = Guid.CreateVersion7();
+    }
+    public void UpdateName(string name)
+    {
+        EnforeceNameBusinessRules(name);
+        Name = name;
+    }
+
+    private static void EnforeceNameBusinessRules(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new BussinessRuleException("Dental office name cannot be empty.");
+        }
     }
 }

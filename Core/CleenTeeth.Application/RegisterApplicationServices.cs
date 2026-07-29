@@ -1,4 +1,5 @@
 ﻿using CleenTeeth.Application.Features.DentalOffices.Commands.CreateDentalOffice;
+using CleenTeeth.Application.Features.DentalOffices.Commands.UpdateDentalOffice;
 using CleenTeeth.Application.Features.DentalOffices.Queries.GetDentalOfficeDetail;
 using CleenTeeth.Application.Features.DentalOffices.Queries.GetDentalOfficesList;
 using CleenTeeth.Application.Utilities;
@@ -16,7 +17,8 @@ public static class RegisterApplicationServices
         services.AddScoped<IRequestHandler<CreateDentalOfficeCommand, Guid>, CreateDentalOfficeCommandHandler>();
         services.AddScoped<IRequestHandler<GetDentalOfficeDetailQuery, DentalOfficeDetailDTO>, GetDentalOfficeDetailQueryHandler>();
         services.AddScoped<IRequestHandler<GetDentalOfficesListQuery, List<DentalOfficesListDTO>>, GetDentalOfficesListQueryHandler>();
-        
+        services.AddScoped<IRequestHandler<UpdateDentalOfficeCommand>, UpdateDentalOfficeCommandHandler>();
+
         return services;
     }
 }
