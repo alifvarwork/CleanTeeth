@@ -16,9 +16,13 @@ public static class RegisterApplicationServices
         services.AddTransient<IMediator, SimpleMediator>();
 
         services.Scan(scan => scan.FromAssembliesOf(typeof(RegisterApplicationServices))
+                                  .AddClasses(c => c.AssignableTo(typeof(IRequestHandler<>)))
+                                  .AsImplementedInterfaces()
+                                  .WithScopedLifetime()
                                   .AddClasses(c => c.AssignableTo(typeof(IRequestHandler<,>)))
                                   .AsImplementedInterfaces()
-                                  .WithScopedLifetime());
+                                  .WithScopedLifetime()
+                                  );
 
         //services.AddScoped<IRequestHandler<CreateDentalOfficeCommand, Guid>, CreateDentalOfficeCommandHandler>();
         //services.AddScoped<IRequestHandler<GetDentalOfficeDetailQuery, DentalOfficeDetailDTO>, GetDentalOfficeDetailQueryHandler>();
