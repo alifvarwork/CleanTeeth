@@ -8,16 +8,24 @@ Get {{CleanTeeth.API_HostAddress}}/019FA8D4-7865-77BD-9F31-5C6C053A16FB
 ACCEPT: application/json
 
 ###
-
 POST {{CleanTeeth.API_HostAddress}} 
 Content-Type: application/json
 
 {
-  "name": "Dental Office B"
+  "name": "Dental Office C"
 }
 ###
 
 PUT {{CleanTeeth.API_HostAddress}}/019FA8D4-7865-77BD-9F31-5C6C053A16FB
+Content-Type: application/json
+
+{
+  "name": "Dental Office A - Updated"
+}
+###
+
+
+DELETE {{CleanTeeth.API_HostAddress}}/019fc25c-20e9-7baf-b8b2-0de324b952c7
 Content-Type: application/json
 
 {
